@@ -1,6 +1,6 @@
 import babel from 'rollup-plugin-babel'
-module.exports = {
-  entry: './src/instance/index.js',
+export default {
+  input: './src/instance/index.js',
   output: {
     file: './dist/vue.js',
     name: 'Vue',
