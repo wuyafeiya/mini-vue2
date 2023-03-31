@@ -43,7 +43,9 @@ export function observe(data) {
   if (typeof data !== 'object' || data == null) {
     return
   }
-  console.log(data)
+  if (data.__ob__ instanceof Observe) {
+    return data.__ob__
+  }
   // 然后掉 Observe 这个类
   return new Observe(data)
 }
