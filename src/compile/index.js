@@ -8,12 +8,13 @@ function genProps(attrs) {
       let obj = {}
       attr.value.split(';').forEach((item) => {
         let [key, value] = item.split(':') // ['color','red']
-        obj[key] = value
+        obj[key.trim()] = value
       })
       attr.value = obj
     }
     str += `${attr.name}:${JSON.stringify(attr.value)},`
   }
+  console.log(`{${str.slice(0, -1)}}`)
   return `{${str.slice(0, -1)}}`
 }
 
@@ -60,7 +61,7 @@ export function compileToFunction(template) {
   // 将 传入的 template 转换成 ast 语法树
   let ast = parseHTML(template)
   let code = codegen(ast)
-  code = `with(this){return${code}}`
+  code = `with(this){return ${code}}`
   let render = new Function(code)
   return render
 }
