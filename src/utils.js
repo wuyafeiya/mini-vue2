@@ -20,8 +20,6 @@ export function mergeOptions(parent, child) {
   for (let key in parent) {
     mergeField(key)
   }
-
-  debugger
   for (let key in child) {
     if (!parent.hasOwnProperty(key)) {
       mergeField(key)

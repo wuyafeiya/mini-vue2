@@ -28,13 +28,29 @@ class Observe {
   }
 }
 
+function dependArray(value) {
+  for (let i = 0; i < value.lenght; i++) {
+    let current = value[i]
+    current.__ob__ && current.__ob__.dep.depend()
+    if (Array.isArray(current)) {
+      dependArray(current)
+    }
+  }
+}
+
 function defineReactive(target, key, value) {
   let dep = new Dep()
-  observe(value)
+  let childOb = observe(value)
   Object.defineProperty(target, key, {
     get: function () {
       if (Dep.target) {
         dep.depend()
+        if (childOb) {
+          childOb.dep.depend()
+          if (Array.isArray(value)) {
+            dependArray(value)
+          }
+        }
       }
       return value
     },
@@ -56,6 +72,5 @@ export function observe(data) {
     return data.__ob__
   }
   // 然后掉 Observe 这个类
-
   return new Observe(data)
 }
