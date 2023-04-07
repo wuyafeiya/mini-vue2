@@ -31,7 +31,7 @@ export function initMixin(Vue) {
       if (template && el) {
         const render = compileToFunction(template)
         ops.render = render
-        console.log(render)
+        // console.log(render)
       }
     }
     mountComponent(vm, el)

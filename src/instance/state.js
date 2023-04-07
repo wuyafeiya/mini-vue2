@@ -12,6 +12,9 @@ function Proxy(vm, target, key) {
   Object.defineProperty(vm, key, {
     get() {
       return vm[target][key]
+    },
+    set(newvalue) {
+      vm[target][key] = newvalue
     }
   })
 }
@@ -26,8 +29,6 @@ function initData(vm) {
   // 如果data是 函数就直接执行 不然就直接data 或者为空 对象
   data = vm._data = typeof data === 'function' ? data.call(vm) : data || {}
   observe(data)
-  console.log(vm)
-
   for (let key in data) {
     Proxy(vm, '_data', key)
   }

@@ -14,7 +14,7 @@ function genProps(attrs) {
     }
     str += `${attr.name}:${JSON.stringify(attr.value)},`
   }
-  console.log(`{${str.slice(0, -1)}}`)
+  // console.log(`{${str.slice(0, -1)}}`)
   return `{${str.slice(0, -1)}}`
 }
 

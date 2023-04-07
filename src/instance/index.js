@@ -1,3 +1,4 @@
+import { nextTick } from '../observe/watcher'
 import { initMixin } from './init'
 import { initLifeCycle } from './lifecycle'
 
@@ -8,6 +9,8 @@ import { initLifeCycle } from './lifecycle'
 function Vue(options) {
   this._init(options)
 }
+Vue.prototype.$nextTick = nextTick
 initMixin(Vue)
 initLifeCycle(Vue)
+
 export default Vue
